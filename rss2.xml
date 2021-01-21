@@ -3,7 +3,7 @@
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>猫の部屋</title>
+    <title>有猫的房间</title>
     <link>https://yueyueniao0223.me/</link>
     
     <atom:link href="https://yueyueniao0223.me/rss2.xml" rel="self" type="application/rss+xml"/>
