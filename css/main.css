@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff2dff;
+  background: #13933c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2731,7 +2731,7 @@ mjx-container + br {
   }
 }
 body {
-  background: url("https://images.unsplash.com/photo-1496522650602-5988dce09660?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTg5fHxjYXR8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+  background: url("images/avatar.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
