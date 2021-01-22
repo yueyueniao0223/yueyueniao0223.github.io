@@ -2153,6 +2153,16 @@ blockquote footer cite:before {
     width: 100% !important;
   }
 }
+@media screen and (min-width: 900px) {
+  .layout > div:first-child {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -o-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+  }
+}
 .layout.hide-aside {
   max-width: 1000px;
 }
@@ -2488,7 +2498,7 @@ blockquote footer cite:before {
 }
 @media screen and (min-width: 900px) {
   #aside-content {
-    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media screen and (max-width: 900px) {
@@ -4208,6 +4218,9 @@ _:future,
 #vcomment .vcards .vcard .vcontent.expand:after,
 #waline .vcards .vcard .vcontent.expand:after {
   z-index: 22;
+}
+#vcomment textarea {
+  background: url("/image/comment_bg.png") 100% 100% no-repeat;
 }
 #waline-wrap textarea {
   background: url("/image/comment_bg.png") 100% 100% no-repeat;
