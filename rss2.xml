@@ -9,8 +9,33 @@
     <atom:link href="https://yueyueniao0223.me/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>北冥有鱼，化而为鸟</description>
-    <pubDate>Tue, 02 Feb 2021 05:31:41 GMT</pubDate>
+    <pubDate>Tue, 09 Feb 2021 01:56:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>剑指offer系列</title>
+      <link>https://yueyueniao0223.me/2021/02/09/leetcode-lcof/</link>
+      <guid>https://yueyueniao0223.me/2021/02/09/leetcode-lcof/</guid>
+      <pubDate>Tue, 09 Feb 2021 01:56:08 GMT</pubDate>
+      
+      <description>记录力扣刷题的收获</description>
+      
+      
+      
+      <content:encoded><![CDATA[<blockquote><h4 id="剑指-Offer-04-二维数组中的查找"><a href="#剑指-Offer-04-二维数组中的查找" class="headerlink" title="剑指 Offer 04. 二维数组中的查找"></a><a href="https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/">剑指 Offer 04. 二维数组中的查找</a></h4><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p></blockquote><p>拿到这道题，先不管它三七二十一，先来一通暴力破解法再说，即直接全数组遍历</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(matrix[i][j] == target)</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>但越想越气，明明给定了每一行与每一列的排列顺序，如果直接全局遍历，那么这个条件不就相当于没给吗，复杂度还是O(n * m)？！不行不行，一定要用上！</p><p>那么该怎么用呢？首先每一行最右侧的数一定是这一行最大的，每一列最下面的数也一定是这一列最大的，那么我们可以从数组右上角开始比较，如果matrix[i] [j] &lt; target,我们就寻找这一列下面的数（即i++），如果matrix[i] [j] &gt; target，那么我们就寻找这一行靠前一些的数（即j—），这样我们就用上了这个条件，时间复杂度也降为了O(n + m)，即访问到的下标的行最多增加n次，访问到的列最多减少m次，因此循环体最多执行n+m次，不多说，上代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = matrix[<span class="number">0</span>].length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; matrix.length &amp;&amp; j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j] == target)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j] &gt; target)</span><br><span class="line">                j--;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="https://yueyueniao0223.me/categories/leetcode/">leetcode</category>
+      
+      
+      <category domain="https://yueyueniao0223.me/tags/Java/">Java</category>
+      
+      <category domain="https://yueyueniao0223.me/tags/%E5%8A%9B%E6%89%A3/">力扣</category>
+      
+      
+      <comments>https://yueyueniao0223.me/2021/02/09/leetcode-lcof/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>单机区域路径覆盖仿真</title>
@@ -31,6 +56,10 @@
       
       <category domain="https://yueyueniao0223.me/categories/%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/">区域覆盖</category>
       
+      
+      <category domain="https://yueyueniao0223.me/tags/%E5%8C%BA%E5%9F%9F%E8%A6%86%E7%9B%96/">区域覆盖</category>
+      
+      <category domain="https://yueyueniao0223.me/tags/Java/">Java</category>
       
       
       <comments>https://yueyueniao0223.me/2021/02/02/area-cover1/#disqus_thread</comments>
@@ -57,6 +86,10 @@
       
       <category domain="https://yueyueniao0223.me/categories/%E6%95%99%E7%A8%8B/">教程</category>
       
+      
+      <category domain="https://yueyueniao0223.me/tags/%E6%90%9C%E7%B4%A2/">搜索</category>
+      
+      <category domain="https://yueyueniao0223.me/tags/%E6%95%99%E7%A8%8B/">教程</category>
       
       
       <comments>https://yueyueniao0223.me/2021/01/27/searchSkill/#disqus_thread</comments>
